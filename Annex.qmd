@@ -1,0 +1,207 @@
+---
+lang: en
+bibliography: references.yaml
+csl: assets/apa7.csl
+link-citations: false
+format:
+  docx:
+    reference-doc: reference.docx
+    number-sections: false
+    keep-md: false
+execute:
+  echo: true
+  warning: false
+---
+
+<!--
+  DRAFT of a separate annex to the chronique "ChatGPT, édition 1759".
+  Executable Quarto document: it sources oracle.R and runs it, so the output shown is the program's own.
+  Build with:  python build.py   (renders in a temp folder and writes Annex.docx)
+  TODO(author): where the files will be available (with the article? on the journal's site? on GitHub?).
+  Not included here on purpose: the program itself (oracle.R) and its tests (oracle-tests.R) stay separate files.
+-->
+
+::: {custom-style="Titre article"}
+Annex 1. Migneret’s Oracle in R
+:::
+
+::: {custom-style="Sous-titre article"}
+Companion to “ChatGPT, édition 1759”
+:::
+
+::: {custom-style="Auteur"}
+Michael Friendly
+:::
+
+## What this is
+
+The column describes the procedure in Migneret’s pamphlet [-@Migneret1759] by which a question of nine words yields a Latin hexameter. This annex presents a short R program that carries out that procedure, and shows what it does. The program is a separate file, `oracle.R` (about 220 lines of base R, including the two tables of the pamphlet), and comes with `oracle-tests.R`, a set of 40 checks against the worked examples printed in the pamphlet. It is meant to be read as a transcription of Migneret’s instructions into code: each step of the column is a small function, and `Oracle()` chains them.
+
+To use it, source the file and ask a question. The `encoding` argument matters on systems where R does not read files as UTF-8 by default.
+
+```{r}
+source("oracle.R", encoding = "UTF-8")
+```
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(comment = "")
+options(width = 76)
+```
+
+## Using the Oracle
+
+`Oracle(question, output, show.steps)` takes a question as a single string, or as a vector of words. The question of Table 1 in the column, in Migneret’s words:
+
+```{r}
+Oracle("Celui que j'aime deviendra-t-il cette année mon époux ?")
+```
+
+With `show.steps = TRUE`, the program shows every step of the column: the nine words, their letter sums, the key of remainders modulo 9, the triangle, the six lines of the grid with the numbers they yield, and the look-up in the two tables. Here it is for the second question of Table 1, spelled as in the pamphlet, with the eighteenth-century *François*:
+
+```{r}
+Oracle("La paix sera-t-elle prochaine et avantageuse aux François ?",
+       show.steps = TRUE)
+```
+
+The machine reads letters, not meaning. With today’s spelling, *Français*, the last sum changes and so does the answer:
+
+```{r}
+Oracle("La paix sera-t-elle prochaine et avantageuse aux Français ?")
+```
+
+The arithmetic does not care about the language of the question. Any question of nine words with no W works (there is no W in Migneret’s alphabet):
+
+```{r}
+Oracle("Shall the one I love become my husband soon")
+```
+
+## A Helpful Oracle
+
+Migneret requires exactly nine words, and assures the reader that it is “always easy” to put a question in that form. The program tries to be as helpful as he is: when the count is wrong, it says how many words it found, shows them, and says how many to add or remove.
+
+```{r}
+answer <- tryCatch(
+  Oracle("Celui que j'aime deviendra-t-il mon époux ?"),
+  error = function(e) e)
+cat(conditionMessage(answer))
+```
+
+## How the program follows the pamphlet
+
+::: {custom-style="Titre illustration"}
+Table A1: The steps of the column and the functions of `oracle.R`
+:::
+
+| Step | Functions | Pamphlet | What they do |
+|:-----|:------------------------------|:----------|:-------------------------------------------|
+| 1 | `normalize_question()`, `check_nine()` | pp. 20–21 | Split the question into exactly nine words; a euphonic *-t-* stays with the word before it |
+| 2 | `word_sums()`, `letter_values` | pp. 22–25 | Letter to number (A = 1 … Z = 23, I = J, U = V, no W); one sum per word |
+| 3 | `mod9()` | pp. 25–26 | Remainder of each sum divided by 9; a remainder of 0 counts as 9 |
+| 4 | `mix_triangle()` | pp. 26–30 | Remainders of adjacent pairs, row by row, down to a single digit |
+| 5 | `triangle_columns()`, `grid_from_triangle()`, `grid_numbers()` | pp. 33–43 | Read the triangle in columns, lay it out in six lines by seven columns, turn each digit into a number |
+| 6 | `look_up()`, `tabula_prima`, `tabula_secunda` | pp. 46–52 and plate | Look the numbers up in the two tables, and read the letters that spell each word |
+
+::: {custom-style="Légende illustration"}
+Reading note: page numbers are those printed in the pamphlet. `Oracle()` chains the six steps; `format_steps()` and `print.oracle()` display them.
+:::
+
+::: {custom-style="Crédits illustration"}
+Credits: the author.
+:::
+
+Steps 3 and 4 are the shortest in the program. In R, Migneret’s remainder (zero counting as 9) and his whole triangle take four lines:
+
+```r
+mod9 <- function(x) (x - 1) %% 9 + 1
+
+mix_triangle <- function(key) {
+  Reduce(function(row, i) mod9(head(row, -1) + tail(row, -1)),
+         seq_len(length(key) - 1), key, accumulate = TRUE)
+}
+```
+
+## What the Oracle can say
+
+Implementing Step 5 showed something the pamphlet does not say. Every digit of the grid except those of column A is used only to compute numbers, and those numbers lead to the same part of the tables whatever the digit was. The proof is by construction: below, the digits of columns B to G are all set to 1, and only the band (the digit of column A) is varied. The program then spells, for each of the six lines of the verse and each of the nine bands, the word that the tables give.
+
+```{r}
+roman <- c("I", "II", "III", "IV", "V", "VI")
+dummy <- matrix(1, 6, 7, dimnames = list(roman, LETTERS[1:7]))
+word_for <- function(band, line) {
+  g <- dummy
+  g[, "A"] <- band              # only the band varies
+  look_up(g, grid_numbers(g))$verse[line]
+}
+words <- outer(1:9, 1:6, Vectorize(word_for))
+```
+
+```{r, echo = FALSE, results = "asis"}
+typeset <- typeset_latin(words)
+two_word <- c(rumpettibi = "rumpet-tibi", solvettibi = "solvet-tibi", uovettibi = "uovet-tibi",
+              nonreddet = "non-reddet", hicannus = "hic-annus")
+typeset[typeset %in% names(two_word)] <- two_word[typeset[typeset %in% names(two_word)]]
+tab <- data.frame(Band = 1:9, matrix(typeset, 9, 6))
+names(tab) <- c("Band", roman)
+cat('\n::: {custom-style="Titre illustration"}\nTable A2: The 54 words the Oracle can say\n:::\n\n')
+print(knitr::kable(tab, format = "pipe", align = "l"))
+cat('\n::: {custom-style="Légende illustration"}\n',
+    'Reading note: the word at position $i$ of the verse (the column headed by the roman numeral for $i$) is the one in the row for band $j$ (the digit of column A). ',
+    'The words are spelled as the tables give them: *u* for *v*, *i* for the *j* of the plate, the ligatures as Migneret prints them. ',
+    'Five cells are two Latin words run together, since the tables have no way to mark a space; the hyphen shows that reading: ',
+    '*rumpet-tibi*, *solvet-tibi*, *uovet-tibi*, *non-reddet* and *hic-annus*. ',
+    '*Etensm* (position II, band 1) is probably a misprint for *etenim*; *nonindet* (position IV, band 3) looks like a similar ',
+    'compound beginning *non-*, but the second word is unclear, so no split is shown.\n:::\n\n',
+    '::: {custom-style="Crédits illustration"}\nCredits: computed by `oracle.R` from the tables of the pamphlet (Migneret, 1759, plate between pp. 54 and 55).\n:::\n\n', sep = "")
+```
+
+There are nine words at each of six positions, and nothing else: the Oracle can say exactly $9^6$ = `r format(9^6, big.mark = ",")` verses, whatever the question, and every one of them differs from the others. That the digits other than the six bands do not matter can also be checked on random keys: replacing the digits of columns B to G by random digits never changes the verse.
+
+```{r}
+set.seed(1759)
+same <- replicate(1000, {
+  key <- sample(1:9, 9, replace = TRUE)
+  g <- grid_from_triangle(mix_triangle(key))
+  g2 <- g
+  # scramble columns B to G
+  g2[, -1] <- sample(1:9, 36, replace = TRUE)
+  identical(look_up(g, grid_numbers(g))$verse,
+            look_up(g2, grid_numbers(g2))$verse)
+})
+all(same)
+```
+
+The six bands are the right-hand edge of the triangle, and the last entry of row *r* of the triangle depends only on the last *r* digits of the key. So the words of the question do not count equally. The first word can alter only the first word of the verse:
+
+```{r}
+q <- c("celui", "que", "j'aime", "deviendra-t", "il",
+       "cette", "année", "mon", "époux")
+Oracle(q)
+Oracle(replace(q, 1, "ce"))
+```
+
+while the last word can alter all six:
+
+```{r}
+Oracle(replace(q, 9, "ami"))
+```
+
+The Oracle sees a word only through its letter sum modulo 9. *Époux* (75) and *mari* (39) both leave a remainder of 3, so the two questions get the same answer, word for word:
+
+```{r}
+Oracle(replace(q, 9, "mari"))
+```
+
+## Checks
+
+`oracle-tests.R` (run with `Rscript oracle-tests.R`) makes 40 checks. The expected values come from the pamphlet, not from the program: the four questions of pp. 20–21 (nine words each), the sums, key and triangle of the worked examples (pp. 25 and 53), the grid, numbers, parts and cells of the first example (pp. 36, 44 and 49–52), and the two verses printed on pp. 52 and 55. Further checks concern the transcribed tables: the 162 numbers of the first table all follow the pattern the arithmetic dictates, and every cell of the second is a letter, a syllable or a “+”.
+
+The two printed examples confirm directly 60 of the 324 cells of the second table. The others rest on a careful reading of the plate, and on the fact that all but two of the 54 words they spell read as Latin (Table A2). A misreading of a cell would be likely to show up as a non-word in that table.
+
+## Conventions of the transcription
+
+The plate prints the long *s* (ſ), which is transcribed as *s*, and a *j* where the verses print an *i*; the program converts one to the other in its output. The pamphlet sets *ae* and *oe* as ligatures (*prædicit*, *fœdera*); `typeset_latin()` does the same when a verse is printed. The verses printed on pp. 52 and 55 read *licitè*, with a grave accent, where the tables spell *licite*; the program returns the latter.
+
+## Bibliography {.unnumbered}
+
+::: {#refs}
+:::

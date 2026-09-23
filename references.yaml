@@ -1,0 +1,120 @@
+references:
+- id: Migneret1759
+  type: book
+  author: [{family: Migneret, given: Pierre-Jean}]
+  issued: {date-parts: [[1759]]}
+  title: "Invention d'une manufacture et fabrique de vers, au petit métier, ou l'art de versifier par les seules règles du calcul numérique"
+  publisher: Arkstée & Merkus
+  publisher-place: Amsterdam
+  URL: https://friendly.github.io/papers/Migneret1759.pdf
+  accessed: {date-parts: [[2026, 9, 19]]}
+- id: Fontenelle1687
+  type: book
+  author: [{family: Fontenelle, given: "B. L. B.", dropping-particle: de}]
+  issued: {date-parts: [[1687]]}
+  title: Histoire des oracles
+  publisher: Les Classiques des sciences sociales
+  URL: https://classiques.uqam.ca/classiques/fontenelle_bernard_de/histoire_des_oracles/Histoire_des_oracles.pdf
+  accessed: {date-parts: [[2026, 9, 19]]}
+- id: Weizenbaum1966
+  type: article-journal
+  author: [{family: Weizenbaum, given: Joseph}]
+  issued: {date-parts: [[1966]]}
+  title: "ELIZA — a computer program for the study of natural language communication between man and machine"
+  container-title: Communications of the ACM
+  volume: 9
+  issue: 1
+  page: 36-45
+  DOI: 10.1145/365153.365168
+- id: Vaswani2017
+  type: paper-conference
+  author:
+  - {family: Vaswani, given: Ashish}
+  - {family: Shazeer, given: Noam}
+  - {family: Parmar, given: Niki}
+  - {family: Uszkoreit, given: Jakob}
+  - {family: Jones, given: Llion}
+  - {family: Gomez, given: Aidan N.}
+  - {family: Kaiser, given: Łukasz}
+  - {family: Polosukhin, given: Illia}
+  issued: {date-parts: [[2017]]}
+  title: Attention is all you need
+  container-title: Advances in Neural Information Processing Systems
+  volume: 30
+  URL: https://arxiv.org/abs/1706.03762
+- id: Sennrich2016
+  type: paper-conference
+  author:
+  - {family: Sennrich, given: Rico}
+  - {family: Haddow, given: Barry}
+  - {family: Birch, given: Alexandra}
+  issued: {date-parts: [[2016]]}
+  title: Neural machine translation of rare words with subword units
+  container-title: "Proceedings of the 54th Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)"
+  page: 1715-1725
+  publisher: Association for Computational Linguistics
+  DOI: 10.18653/v1/P16-1162
+- id: Buehler2026
+  type: article-journal
+  author: [{family: Buehler, given: Markus J.}]
+  issued: {date-parts: [[2026]]}
+  title: Reading and steering representations of materials-science mechanisms in an open-weight language model
+  container-title: arXiv
+  URL: https://arxiv.org/abs/2607.20058
+- id: Tao2026Simons
+  type: webpage
+  author: [{family: Beaufore, given: Jane}]
+  issued: {date-parts: [[2026, 8, 13]]}
+  title: "Fields Medalist Terence Tao on artificial intelligence and why we do math"
+  container-title: Simons Foundation
+  URL: https://www.simonsfoundation.org/2026/08/13/fields-medalist-terence-tao-on-artificial-intelligence-and-why-we-do-math/
+  accessed: {date-parts: [[2026, 9, 22]]}
+- id: ArmatteDroesbeke2023
+  type: article-journal
+  author:
+  - {family: Armatte, given: Michel}
+  - {family: Droesbeke, given: Jean-Jacques}
+  issued: {date-parts: [[2023]]}
+  title: Hommage à Antoine de Falguerolles (1946-2023)
+  container-title: "<span class=\"nocase\">Statistique et Société</span>"
+  volume: 11
+  issue: 3
+  DOI: 10.4000/statsoc.1537
+- id: Friendly2007
+  type: article-journal
+  author: [{family: Friendly, given: Michael}]
+  issued: {date-parts: [[2007]]}
+  title: "A.-M. Guerry's Moral Statistics of France: Challenges for multivariable spatial analysis"
+  container-title: Statistical Science
+  volume: 22
+  issue: 3
+  page: 368-399
+  DOI: 10.1214/07-STS241
+- id: Friendly2008
+  type: article-journal
+  author: [{family: Friendly, given: Michael}]
+  issued: {date-parts: [[2008]]}
+  title: The golden age of statistical graphics
+  container-title: Statistical Science
+  volume: 23
+  issue: 4
+  page: 502-535
+  DOI: 10.1214/08-STS268
+- id: Friendly2020
+  type: webpage
+  author:
+  - {family: Friendly, given: Michael}
+  - {literal: les Chevaliers}
+  issued: {date-parts: [[2020]]}
+  title: "Raiders of the lost tombs: The search for some heroes of the history of data visualization"
+  container-title: Nightingale
+  URL: https://medium.com/nightingale/raiders-of-the-lost-tombs-the-search-for-some-heroes-of-the-history-of-data-visualization-c4a4b4690d24
+  accessed: {date-parts: [[2026, 9, 20]]}
+- id: Friendly2023
+  type: speech
+  author: [{family: Friendly, given: Michael}]
+  issued: {date-parts: [[2023, 10, 18]]}
+  title: A celebration of Les Chevaliers des Albums de Statistique Graphique
+  genre: Presentation slides
+  URL: https://www.datavis.ca/papers/ruderman-chevaliers.pdf
+  accessed: {date-parts: [[2026, 9, 19]]}

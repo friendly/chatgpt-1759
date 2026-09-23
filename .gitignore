@@ -1,0 +1,24 @@
+# RStudio / R
+.Rproj.user/
+.Rhistory
+.RData
+.Ruserdata
+
+# Quarto build artifacts
+.quarto/
+*.knit.md
+*_files/
+
+# Build outputs kept only for visual checking, not the deliverable (see build.py)
+*.pdf
+
+# The original blog post lives elsewhere (see README); not part of this repo
+index.qmd
+
+# Private notes, correspondence and journal materials -- not for the public repo
+notes/
+
+# OS cruft
+Thumbs.db
+.DS_Store
+.positai
