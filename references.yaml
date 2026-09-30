@@ -7,7 +7,6 @@ references:
   publisher: Arkstée & Merkus
   publisher-place: Amsterdam
   URL: https://friendly.github.io/papers/Migneret1759.pdf
-  accessed: {date-parts: [[2026, 9, 19]]}
 - id: Fontenelle1687
   type: book
   author: [{family: Fontenelle, given: "B. L. B.", dropping-particle: de}]
@@ -15,7 +14,6 @@ references:
   title: Histoire des oracles
   publisher: Les Classiques des sciences sociales
   URL: https://classiques.uqam.ca/classiques/fontenelle_bernard_de/histoire_des_oracles/Histoire_des_oracles.pdf
-  accessed: {date-parts: [[2026, 9, 19]]}
 - id: Weizenbaum1966
   type: article-journal
   author: [{family: Weizenbaum, given: Joseph}]
@@ -117,4 +115,3 @@ references:
   title: A celebration of Les Chevaliers des Albums de Statistique Graphique
   genre: Presentation slides
   URL: https://www.datavis.ca/papers/ruderman-chevaliers.pdf
-  accessed: {date-parts: [[2026, 9, 19]]}

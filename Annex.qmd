@@ -37,6 +37,8 @@ Michael Friendly
 
 The column describes the procedure in Migneret’s pamphlet [-@Migneret1759] by which a question of nine words yields a Latin hexameter. This annex presents a short R program that carries out that procedure, and shows what it does. The program is a separate file, `oracle.R` (about 220 lines of base R, including the two tables of the pamphlet), and comes with `oracle-tests.R`, a set of 40 checks against the worked examples printed in the pamphlet. It is meant to be read as a transcription of Migneret’s instructions into code: each step of the column is a small function, and `Oracle()` chains them.
 
+The files are available from a public GitHub repository, <https://github.com/friendly/chatgpt-1759>, in its `R/` folder: `oracle.R`, `oracle-tests.R`, and `oracle-modern.R` (the Oracle asked four modern questions, referred to in the column). Download the repository, or save the files individually from there.
+
 To use it, source the file and ask a question. The `encoding` argument matters on systems where R does not read files as UTF-8 by default.
 
 ```{r}
@@ -193,7 +195,7 @@ Oracle(replace(q, 9, "mari"))
 
 ## Checks
 
-`oracle-tests.R` (run with `Rscript oracle-tests.R`) makes 40 checks. The expected values come from the pamphlet, not from the program: the four questions of pp. 20–21 (nine words each), the sums, key and triangle of the worked examples (pp. 25 and 53), the grid, numbers, parts and cells of the first example (pp. 36, 44 and 49–52), and the two verses printed on pp. 52 and 55. Further checks concern the transcribed tables: the 162 numbers of the first table all follow the pattern the arithmetic dictates, and every cell of the second is a letter, a syllable or a “+”.
+`oracle-tests.R` (run with `Rscript R/oracle-tests.R` from the repo root) makes 40 checks. The expected values come from the pamphlet, not from the program: the four questions of pp. 20–21 (nine words each), the sums, key and triangle of the worked examples (pp. 25 and 53), the grid, numbers, parts and cells of the first example (pp. 36, 44 and 49–52), and the two verses printed on pp. 52 and 55. Further checks concern the transcribed tables: the 162 numbers of the first table all follow the pattern the arithmetic dictates, and every cell of the second is a letter, a syllable or a “+”.
 
 The two printed examples confirm directly 60 of the 324 cells of the second table. The others rest on a careful reading of the plate, and on the fact that all but two of the 54 words they spell read as Latin (Table A2). A misreading of a cell would be likely to show up as a non-word in that table.
 

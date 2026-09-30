@@ -130,7 +130,7 @@ His pamphlet contains a working algorithm: a proof of concept that anyone can op
 
 # The Oracle at work
 
-Let us see what Migneret’s Oracle machine actually produces. Antoine worked through two examples, each a question posed to the Oracle and its response, in Latin (Table 1).
+Let us see what Migneret’s Oracle machine actually produces. Migneret worked out two examples in the pamphlet itself, each a question posed to the Oracle and its response, in Latin (Table 1).
 
 ::: {custom-style="Titre illustration"}
 Table 1: Two questions put to Migneret’s Oracle, and its responses
@@ -138,15 +138,15 @@ Table 1: Two questions put to Migneret’s Oracle, and its responses
 
 | Question (French) | Oracle response (Latin) | Translation |
 |:---------------------------|:-----------------------------|:-----------------------------|
-| Celui que j’aime deviendra-t-il mon époux ? | *Ecce equidem licitè prædicit talia numen.* | Behold, the god foretells such things as are permitted. |
-| La paix sera-t-elle prochaine et avantageuse aux François ? | *Credo satis licitè, donabit fœdera numen.* | I think it fair enough; the god will grant a treaty. |
+| Celui que j’aime deviendra-t-il mon époux ? | *Ecce equidem licitè prædicit talia numen.* | Behold, the god indeed rightly foretells such things. |
+| La paix sera-t-elle prochaine et avantageuse aux François ? | *Credo satis licitè, donabit fœdera numen.* | I believe, quite rightly, the god will grant a treaty. |
 
 ::: {custom-style="Légende illustration"}
 Reading note: the first question is “Will the one I love become my husband?”; the second, “Will peace be near and advantageous to the French?”, spelled as in the pamphlet (*François*, today *Français*).
 :::
 
 ::: {custom-style="Crédits illustration"}
-Credits: examples worked through by A. de Falguerolles (February 2023); translations by the author.
+Credits: examples worked out by Migneret (1759, pp. 48–52 and 53–55); translations by the author.
 :::
 
 Both answers are perfectly oracular: confident-sounding (like the Pythia at the Oracle of Delphi), Latin (to make them mystic), and applicable to almost anything. Just like ELIZA![^spelling]
@@ -290,7 +290,11 @@ Reading note: the word at position $i$ of the verse (the column headed by the ro
 Credits: computed by `oracle.R` from the tables of the pamphlet (Migneret, 1759, plate between pp. 54 and 55); the full derivation is in Annex 1.
 :::
 
-What was he thinking? Not, surely, that he had built a useful oracle. The point is the demonstration: show the mechanism, expose the trick. Any oracle could be built this way. The god in the machine is arithmetic.
+What was he thinking? Not, surely, that he had built a useful oracle. The point is the demonstration: show the mechanism, expose the trick. Any oracle could be built this way. The god in the machine is **arithmetic**.
+
+That's exactly the joke that appealed so much to Antoine: He was an early adopter of AI sceptisim and
+probably thought: How nice if chatGPT could be unmasked, as in the _Wizard of Oz_, when Dorothy's dog, Toto, knocks over a green screen in the throne room to expose--- merely an ordinary old man producing mechanical illusions and speaking into a tube. The modern large language model would simply replace the speaking tube with (🥁 drumroll!) a terminal window, connected to the internet of information, learned of all SKILLS and AGENTS. But, he might continue to wonder, along with his _Chevalier_ friends, whether there really was just a white-haired old geezer behind
+their computer screen.
 
 # The parallel with large language models
 
@@ -373,7 +377,7 @@ While doing this, I had the idea that it would be lovely to show this work to An
 A question that keeps philosophers up at night gets exactly the same machinery as a marriage proposal: a letter table and an arithmetic triangle with code functions performing the steps.
 Lo and behold: out comes a sentence that sounds like revelation. Antoine’s joke still taps into questions we ask machines today.[^modern]
 
-[^modern]: Three more modern questions and their answers, computed the same way, are in `oracle-modern.R`.
+[^modern]: Three more modern questions and their answers, computed the same way, are in `R/oracle-modern.R`.
 
 # Conclusion
 
