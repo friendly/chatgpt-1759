@@ -14,10 +14,11 @@ execute:
 ---
 
 <!--
-  DRAFT of a separate annex to the chronique "ChatGPT, édition 1759".
+  Companion to the chronique "ChatGPT, édition 1759" -- NOT submitted to the journal (Gilbert, 2 Oct
+  committee decision: no annex, just a link to the GitHub repository from the chronique itself). Kept
+  here as documentation in that repository: https://github.com/friendly/chatgpt-1759.
   Executable Quarto document: it sources oracle.R and runs it, so the output shown is the program's own.
   Build with:  python build.py   (renders in a temp folder and writes Annex.docx)
-  TODO(author): where the files will be available (with the article? on the journal's site? on GitHub?).
   Not included here on purpose: the program itself (oracle.R) and its tests (oracle-tests.R) stay separate files.
 -->
 

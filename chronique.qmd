@@ -126,7 +126,9 @@ This reminds me so much of ELIZA, the world’s first AI chatbot. Developed by J
 
 Migneret is doing Enlightenment demystification in the tradition of Bernard Le Bovier de Fontenelle’s *Histoire des oracles* [-@Fontenelle1687], which he cites explicitly. But Fontenelle had simply argued that oracles were fraud; Migneret goes a step further and demonstrates the mechanism for producing replies to prompts without knowing anything of substance. Was this ChatGPT v0.1?
 
-His pamphlet contains a working algorithm: a proof of concept that anyone can operate. Migneret knew exactly what he had done: he could have written an R function, `Oracle(question)`, if time travel had been available to him. In Annex 1, I have done it for him. But there is more to Migneret’s bravado. Buried in the preface is a quiet boast: the best mathematicians of his day would perhaps have declared it impossible to produce Latin verses by arithmetic alone. He pulled it off anyway.
+His pamphlet contains a working algorithm: a proof of concept that anyone can operate. Migneret knew exactly what he had done: he could have written an R function, `Oracle(question)`, if time travel had been available to him. I have done it for him, in a program kept in a public repository.[^github] But there is more to Migneret’s bravado. Buried in the preface is a quiet boast: the best mathematicians of his day would perhaps have declared it impossible to produce Latin verses by arithmetic alone. He pulled it off anyway.
+
+[^github]: `oracle.R` and further demonstrations are at <https://github.com/friendly/chatgpt-1759>.
 
 # The Oracle at work
 
@@ -236,7 +238,7 @@ Reading note: the worked example printed on page 53 concerns a different questio
 Credits: Migneret (1759, p. 53); scan of the 1759 original (public domain), IRIS-LILLIAD, Université de Lille.
 :::
 
-**Step 5. Read six band indicators from the triangle.** The right-hand edge of the triangle, read upward from its tip, begins with six digits, one for each word of the hexameter, each between 1 and 9. For our question they are 3, 9, 3, 6, 2, 3. Each is the number of a horizontal band, common to the two tables of Step 6 (Figure 3). Migneret dresses this up: he lays the triangle out in a grid of six lines and seven columns, then multiplies, adds and reduces modulo 9 once more to turn every other digit into a number between 11 and 72 (pp. 33–43), the numbers printed in the first table. Implementing the procedure in R shows that this changes nothing: the six indicators alone decide the verse (the program is in Annex 1).
+**Step 5. Read six band indicators from the triangle.** The right-hand edge of the triangle, read upward from its tip, begins with six digits, one for each word of the hexameter, each between 1 and 9. For our question they are 3, 9, 3, 6, 2, 3. Each is the number of a horizontal band, common to the two tables of Step 6 (Figure 3). Migneret dresses this up: he lays the triangle out in a grid of six lines and seven columns, then multiplies, adds and reduces modulo 9 once more to turn every other digit into a number between 11 and 72 (pp. 33–43), the numbers printed in the first table. Implementing the procedure in R shows that this changes nothing: the six indicators alone decide the verse (the program is in the GitHub repository).
 
 ```
 Line:      I         II       III        IV      V      VI
@@ -287,7 +289,7 @@ Reading note: the word at position $i$ of the verse (the column headed by the ro
 :::
 
 ::: {custom-style="Crédits illustration"}
-Credits: computed by `oracle.R` from the tables of the pamphlet (Migneret, 1759, plate between pp. 54 and 55); the full derivation is in Annex 1.
+Credits: computed by `oracle.R` from the tables of the pamphlet (Migneret, 1759, plate between pp. 54 and 55); the full derivation is in the GitHub repository.
 :::
 
 What was he thinking? Not, surely, that he had built a useful oracle. The point is the demonstration: show the mechanism, expose the trick. Any oracle could be built this way. The god in the machine is **arithmetic**.
@@ -361,7 +363,7 @@ What his machine does raise is the prior question: is the category of trick suff
 
 # Coding the Oracle
 
-To be sure I had understood the pamphlet, I wanted to see if I could make Migneret's machine actually run and produce his output from the Oracle. I did so with the help of an AI assistant (Claude Sonnet 5, from Anthropic, used through its Claude Code tool in September 2026), and it is worth saying how, because it is another angle on this topic. My AI assistant read the scan of the pamphlet and Migneret’s own instructions, and we turned them together into an R program (Annex 1), tested against the worked examples he prints. In a slightly self-referential way, Claude served as my Oracle in this.
+To be sure I had understood the pamphlet, I wanted to see if I could make Migneret's machine actually run and produce his output from the Oracle. I did so with the help of an AI assistant (Claude Sonnet 5, from Anthropic, used through its Claude Code tool in September 2026), and it is worth saying how, because it is another angle on this topic. My AI assistant read the scan of the pamphlet and Migneret’s own instructions, and we turned them together into an R program (in the GitHub repository), tested against the worked examples he prints. In a slightly self-referential way, Claude served as my Oracle in this.
 
 The optical character recognition was good enough for the instructions but useless for the two tables, whose 324 cells had to be read one at a time from enlarged images of the plate. The program reproduced both of his verses. Along the way it exposed what reading alone had missed: the eighteenth-century spelling *François* that his second example requires, and the fact that only six digits decide the verse.
 

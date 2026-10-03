@@ -10,16 +10,17 @@ arithmetic, and a look-up table — and how closely its mechanism maps onto a mo
 - **Original version**: published as a blog post at
   [friendly.github.io/blog/posts/2026-08-chatgpt-1759](https://friendly.github.io/blog/posts/2026-08-chatgpt-1759/)
 - **This repo**: the Quarto source for a *chronique* adapted for *Statistique et Société*, along
-  with `oracle.R`, the R implementation of Migneret's Oracle that the chronique refers to instead
-  of reprinting inline.
+  with `oracle.R`, the R implementation of Migneret's Oracle that the chronique links to here
+  instead of reprinting inline.
 
 ## Contents
 
-- `chronique.qmd` — Quarto source for the chronique. `build.py` renders it to two Word versions:
-  author–date citations with a Bibliography section, and every source as a footnote.
-- `Annex.qmd` — "Annex 1": an executable companion document that sources `R/oracle.R` and shows
-  what it does (the two examples from the pamphlet, the 54 words the Oracle can say, and how the
-  design was found by implementing it), without reprinting the program itself.
+- `chronique.qmd` — Quarto source for the chronique, as submitted (references listed at the end,
+  per the journal's choice). `build.py` also renders a footnotes variant, not submitted.
+- `Annex.qmd` — an executable companion document that sources `R/oracle.R` and shows what it does
+  (the two examples from the pamphlet, the 54 words the Oracle can say, and how the design was
+  found by implementing it), without reprinting the program itself. Not submitted to the journal —
+  kept here as documentation, since the chronique links to this repository instead of an annex.
 - `R/` — the standalone, runnable implementation
   - `oracle.R` — Migneret's six-step procedure, base R (~220 lines)
   - `oracle-tests.R` — 40 checks against the worked examples printed in the pamphlet
